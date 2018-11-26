@@ -1,52 +1,98 @@
-# ermahgerd-emberjs-cognito
+# README - ermahgerd-emberjs-cognito
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This Ember application talks to a Rails API server over at 
+[https://github.com/cybertooth-io/ermahgerd-rails-api-cognito](https://github.com/cybertooth-io/ermahgerd-rails-api-cognito).
 
-## Prerequisites
+## Development - Getting Started
 
-You will need the following things properly installed on your computer.
+You need the following:
 
 * [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+* [Yarn](https://yarnpkg.com/en/)
+* [Node.js](https://nodejs.org/) - consider using [NVM](https://github.com/creationix/nvm)
+* [Ember CLI](https://ember-cli.com/) - make sure to install the CLI `yarn global ember-cli`
+* [Google Chrome](https://google.com/chrome/) - unit tests run through testem require Chrome
 
-## Installation
 
-* `git clone <repository-url>` this repository
-* `cd ermahgerd-emberjs-cognito`
-* `npm install`
+### First Time Setting Up
 
-## Running / Development
+1. `git clone git@github.com:cybertooth-io/ermahgerd-emberjs-cognito.git` - to download the code
+1. `cd ermahgerd-emberjs-cognito` - to get into the checked out code
+1. `yarn` or `yarn install` - will install all javascript libraries
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+### Running The Server
 
-### Code Generators
+`ember s --proxy=http://localhost:3000` - runs the server and proxies all Ember Data 
+requests to `http://locahost:3000` (that's a Rails API server).  Find your app 
+at [http://localhost:4200](http://localhost:4200).
 
-Make use of the many generators for code, try `ember help generate` for more details
+While your Ember server is running, feel free to check out the tests by 
+visiting [http://localhost:4200/tests](http://localhost:4200/tests).
 
-### Running Tests
+### Testing
 
-* `ember test`
-* `ember test --server`
+Ember comes with linters and qunit testing.
+
+`ember t` - will run the tests once in your console
+
+`ember t -s` - will run the tests in a new Chrome window and watch for changes
+
+`ember t -s --filter='role'` - will run tests only tests with the word _role_ in their path
 
 ### Linting
 
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+* `yarn run lint:hbs`
+* `yarn run lint:js`
+* `yarn run lint:js -- --fix` 
+
+### Development Workflow
+
+#### Code Generators
+
+Make use of the many generators for code, try `ember help generate` for more details
+
+_...More Coming soon_
+
+## Deployment
+
+### Configuration Notes
+
+#### Addons
+
+Please use this section to mention the addons that we've been installing that way if we do an upgrade
+and need to bring them all back we can!
+
+```bash
+# SASS for stylesheets; make sure to renamed app/styles/app.css -> app/styles/app.scss
+ember install ember-cli-sass
+# Bootstrap 4 support; bring it all in looks like bootstrap@^4.1.0 comes in, should be bootstrap@~4.1.0 
+ember install ember-cli-bootstrap-4
+# For authentication
+ember install ember-simple-auth
+ember install ember-simple-auth-token
+# Encouraged to stop using this, but I actually love this helper
+ember install ember-route-action-helper
+ember install ember-concurrency
+
+```
+
+#### `config/environment.js`
+
+1. `ember-simple-auth-token` is configured in here.  Needs to match the token & cookie authentication paths in your API server.
 
 ### Building
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+`ember b` - builds for your development environment
 
-### Deploying
+`ember build --environment production` - builds for production minifying and shrinking
 
-Specify what it takes to deploy your app.
+_...More Coming soon_
+
+## Contributing
+
+Team members, create a branch and pull request.
+
+General Public: Fork and create pull request.
 
 ## Further Reading / Useful Links
 
