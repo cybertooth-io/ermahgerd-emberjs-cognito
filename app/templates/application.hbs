@@ -13,12 +13,15 @@
     <div class="form-inline">
       {{#if session.isAuthenticated}}
         <button
-          {{action "logout" session on="click"}}
+          onclick={{action "logout" session}}
           class="btn btn-outline-primary btn-sm" type="button">
           Logout
         </button>
-
       {{else}}
+        {{#link-to "sign-up" class="btn btn-outline-info btn-sm"}}
+          Sign Up
+        {{/link-to}}
+        &nbsp;
         {{#link-to "login" class="btn btn-outline-primary btn-sm"}}
           Login
         {{/link-to}}
@@ -28,3 +31,5 @@
 </nav>
 
 {{outlet}}
+
+{{ember-notify}}

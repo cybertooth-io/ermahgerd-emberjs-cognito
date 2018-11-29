@@ -1,1 +1,18 @@
+<section class="my-3">
+  <div class="container">
+    <p>
+      Authenticated At: {{session.data.authenticated.cognitoUser.authenticatedAt}}
+    </p>
+    <p>
+      Issued: {{session.data.authenticated.cognitoUser.issuedAt}}
+    </p>
+    <p>
+      Expires: {{session.data.authenticated.cognitoUser.expiresAt}}
+    </p>
+    <p>
+      {{session.data.authenticated.cognitoUser.jti}}
+    </p>
+  </div>
+</section>
+
 {{outlet}}

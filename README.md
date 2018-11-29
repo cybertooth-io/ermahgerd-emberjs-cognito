@@ -67,12 +67,13 @@ and need to bring them all back we can!
 ember install ember-cli-sass
 # Bootstrap 4 support; bring it all in looks like bootstrap@^4.1.0 comes in, should be bootstrap@~4.1.0 
 ember install ember-cli-bootstrap-4
+# For importing libraries (replaces ember-browserify); needed for: `import Auth from '@aws-amplify/Auth'
+ember install ember-auto-import
 # For authentication
-ember install ember-simple-auth
-ember install ember-simple-auth-token
+yarn add @aws-amplify/core -D
+yarn add @aws-amplify/auth -D
 # Encouraged to stop using this, but I actually love this helper
 ember install ember-route-action-helper
-ember install ember-concurrency
 
 ```
 
@@ -101,3 +102,8 @@ General Public: Fork and create pull request.
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+
+# AWS Cognito & AWS Amplify Auth
+
+1. Create an Ember Service that will read from the environment settings to configure the Cognito User Pool.
+See 

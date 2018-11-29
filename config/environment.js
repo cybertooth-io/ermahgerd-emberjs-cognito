@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'ermahgerd-emberjs-cognito',
     environment,
@@ -17,9 +17,33 @@ module.exports = function(environment) {
       }
     },
 
+    'ember-simple-auth': {
+      routeAfterAuthentication: 'protected',
+      routeIfAlreadyAuthenticated: 'protected'
+    },
+
     APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
+      awsAmplifyAuth: {
+        config: {
+          // Amazon Cognito Region
+          region: 'ca-central-1',
+          // Amazon Cognito User Pool ID
+          userPoolId: 'ca-central-1_ocRK2nsIR',
+          // Amazon Cognito Web Client ID (26-char alphanumeric string)
+          userPoolWebClientId: '5ht2oa80l95idve05t3q5ir10u',
+        }
+      },
+      'ember-simple-auth-aws-amplify': {
+        /**
+         * AWS Cognito's REFRESH tokens expire after 30 days by default.  This is configurable in your AWS Cognito
+         * pools through the CLI or AWS Web Console.
+         *
+         * If you change your refresh token expiry you can let your app know about this.
+         *
+         * Currently we do not use this information for anything.
+         */
+        refreshTokenExpiryInDays: 30
+      }
     }
   };
 

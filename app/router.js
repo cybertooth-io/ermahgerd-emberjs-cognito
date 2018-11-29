@@ -10,6 +10,7 @@ Router.map(function () {
   this.route('protected', function () {
   });
   this.route('login');
+  this.route('sign-up');
 });
 
 export default Router;
