@@ -1,0 +1,26 @@
+<section class="my-3">
+  <div class="container">
+    <div class="alert alert-danger">
+      <h5>Congratulations!</h5>
+      <p>
+        Take great pride in knowing that you just broke the internet.
+        Or maybe the internet tubes are full?
+        Either way, we detected an unexpected error.
+        To help you get through this tough time, here are some error details we were able to gather:
+      </p>
+      <ul>
+        {{#each model.errors as |error|}}
+          <li>
+            <strong>{{error.title}}</strong>
+            -
+            {{error.detail}}
+          </li>
+        {{/each}}
+      </ul>
+      <p class="mb-0 small">
+        ({{model.message}})
+      </p>
+    </div>
+  </div>
+</section>
+{{outlet}}

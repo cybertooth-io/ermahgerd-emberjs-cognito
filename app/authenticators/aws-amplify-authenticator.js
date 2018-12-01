@@ -40,7 +40,7 @@ export default Base.extend({
 
     yield timeout(wait);
 
-    console.warn('Scheduled refresh of access token for authentication.');
+    console.warn('Commencing refresh of the access token.');
     return getOwner(this).lookup('session:main').restore();
   }),
 

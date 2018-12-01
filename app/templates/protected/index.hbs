@@ -3,7 +3,6 @@
     <div class="d-flex my-3">
       <h1 class="flex-fill"><span class="text-success">Protected</span> Path</h1>
       <div class="align-self-center">
-        {{!-- buttons will go here --}}
       </div>
     </div>
 
@@ -14,6 +13,18 @@
       </p>
       <p>
         {{#link-to "index"}}Public Page{{/link-to}}
+      </p>
+      <p>
+        Authenticated At: {{session.data.authenticated.cognitoUser.authenticatedAt}}
+      </p>
+      <p>
+        Issued: {{session.data.authenticated.cognitoUser.issuedAt}}
+      </p>
+      <p>
+        Expires: {{session.data.authenticated.cognitoUser.expiresAt}}
+      </p>
+      <p>
+        {{session.data.authenticated.cognitoUser.jti}}
       </p>
     </div>
   </div>
