@@ -1,8 +1,7 @@
 import { get } from '@ember/object';
 import { Hub } from '@aws-amplify/core';
-import config from '../config/environment';
 import Auth from '@aws-amplify/auth';
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
 import CognitoUser from '../utils/proxies/cognito-user';
 
 /**
@@ -66,10 +65,12 @@ export default Service.extend({
       .then(response => this._handleSuccessfulAuthentication(response, refreshTask));
   },
 
+  configuration: service('ember-simple-auth-aws-amplify.configuration'),
+
   init() {
     this._super(...arguments);
     Hub.listen('auth', this);
-    Auth.configure(get(config, 'APP.awsAmplifyAuth.config'));
+    Auth.configure(this.get('configuration.awsAmplifyAuthConfig'));
   },
 
   /**

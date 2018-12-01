@@ -8,10 +8,12 @@ export default Mixin.create(DataAdapterMixin, {
       const accessToken = this.get('session.data.authenticated.cognitoUser.accessToken');
       const idToken = this.get('session.data.authenticated.cognitoUser.idToken');
 
-      xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
-      xhr.setRequestHeader('Identification', idToken);
+      xhr.setRequestHeader(this.get('configuration.headerAuthorization'), `Bearer ${accessToken}`);
+      xhr.setRequestHeader(this.get('configuration.headerIdentification'), idToken);
     }
   },
+
+  configuration: service('ember-simple-auth-aws-amplify.configuration'),
 
   session: service()
 });
