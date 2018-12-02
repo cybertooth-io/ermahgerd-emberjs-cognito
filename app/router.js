@@ -16,6 +16,7 @@ Router.map(function () {
   this.route('login');
   this.route('sign-up');
   this.route('protected-error');
+  this.route('application-error');
 });
 
 export default Router;
