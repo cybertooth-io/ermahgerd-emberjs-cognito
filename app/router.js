@@ -13,6 +13,7 @@ Router.map(function () {
       });
     });
     this.route('change-password');
+    this.route('update-profile');
   });
   this.route('login');
   this.route('sign-up');

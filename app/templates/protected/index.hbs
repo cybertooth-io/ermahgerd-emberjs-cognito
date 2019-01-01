@@ -4,13 +4,12 @@
       <h1 class="flex-fill">
         <span class="text-success">Protected</span> Path
         <small class="text-muted">
-          Welcome {{session.data.authenticated.cognitoUser.subjectAttributes.given_name}}
+          Welcome {{session.data.authenticated.cognitoUser.attributes.given_name}}
         </small>
       </h1>
       <div class="align-self-center">
       </div>
     </div>
-
     <div>
       <p>
         Welcome to the protected index page that you can only get to once you have logged in. Check
