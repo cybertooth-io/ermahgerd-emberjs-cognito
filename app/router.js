@@ -12,11 +12,14 @@ Router.map(function () {
       this.route('roles', function () {
       });
     });
+    this.route('change-password');
   });
   this.route('login');
   this.route('sign-up');
   this.route('protected-error');
   this.route('application-error');
+  this.route('forgot-password');
+  this.route('reset-password');
 });
 
 export default Router;

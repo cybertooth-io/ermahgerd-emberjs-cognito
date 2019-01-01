@@ -23,11 +23,21 @@
         <ul class="navbar-nav">
           {{#if session.isAuthenticated}}
             <li class="nav-item">
+              {{#link-to "protected.index" class="nav-link"}}
+                Home
+              {{/link-to}}
+            </li>
+            <li class="nav-item">
               {{#link-to "protected.configuration.index" class="nav-link"}}
                 Configuration
               {{/link-to}}
             </li>
             <div class="dropdown-divider"></div>
+            <li class="nav-item">
+              {{#link-to "protected.change-password" class="nav-link"}}
+                Change Password
+              {{/link-to}}
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick={{action "logout" session}}>
                 Logout
@@ -55,12 +65,12 @@
     {{#if session.isAuthenticated}}
       <div class="btn-group d-none d-md-flex ml-auto" role="group" aria-label="Go & Sign Out">
         <div class="btn-group">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="js-navbar-go-dropdown"
                   data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
             Go
           </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="js-navbar-go-dropdown">
             {{#link-to "protected.configuration.index" class="dropdown-item"}}
               Configuration
             {{/link-to}}
@@ -70,11 +80,22 @@
             {{/link-to}}
           </div>
         </div>
-        <button
-          onclick={{action "logout" session}}
-          class="btn btn-outline-primary btn-sm d-none d-md-flex" type="button">
-          Logout
-        </button>
+        <div class="btn-group">
+          <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="js-navbar-me-dropdown"
+                  data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            Me
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="js-navbar-me-dropdown">
+            {{#link-to "protected.change-password" class="dropdown-item"}}
+              Change Password
+            {{/link-to}}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:void(0);" onclick={{action "logout" session}}>
+              Logout
+            </a>
+          </div>
+        </div>
       </div>
     {{else}}
       <div class="btn-group d-none d-md-flex ml-auto" role="group" aria-label="Sign In & Sign Up">
@@ -91,4 +112,4 @@
 
 {{outlet}}
 
-{{ember-notify}}
+{{ember-notify closeAfter=5000 messageStyle="bootstrap"}}

@@ -78,12 +78,15 @@ ember install ember-cli-bootstrap-4
 # For importing libraries (replaces ember-browserify); needed for: `import Auth from '@aws-amplify/Auth'
 ember install ember-auto-import
 
-# For authentication
-yarn add @aws-amplify/core -D
-yarn add @aws-amplify/auth -D
+# Used to manipulate arrays template-side
+ember install ember-composable-helpers
 
 # Encouraged to stop using this, but I actually love this helper
 ember install ember-route-action-helper
+
+# For authentication
+yarn add @aws-amplify/core -D
+yarn add @aws-amplify/auth -D
 ```
 
 #### `config/environment.js`

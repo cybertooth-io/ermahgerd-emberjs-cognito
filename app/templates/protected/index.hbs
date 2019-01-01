@@ -1,7 +1,11 @@
 <section class="my-3">
   <div class="container">
     <div class="d-flex my-3">
-      <h1 class="flex-fill"><span class="text-success">Protected</span> Path</h1>
+      <h1 class="flex-fill">
+        <span class="text-success">Protected</span> Path
+        <small
+          class="text-muted">Welcome {{session.data.authenticated.cognitoUser.subjectAttributes.given_name}}</small>
+      </h1>
       <div class="align-self-center">
       </div>
     </div>
@@ -15,6 +19,20 @@
         {{#link-to "index"}}Public Page{{/link-to}}
       </p>
       <p>
+        User Name: {{session.data.authenticated.cognitoUser.cognitoUsername}}
+      </p>
+      <p>
+        Email Verified: {{session.data.authenticated.cognitoUser.emailVerified?}}
+      </p>
+      <p>
+        MFA Enabled: {{session.data.authenticated.cognitoUser.mfaEnabled?}}
+      </p>
+      <p>
+        Groups
+        ({{session.data.authenticated.cognitoUser.cognitoGroups.length}}):
+        {{join ", " session.data.authenticated.cognitoUser.cognitoGroups}}
+      </p>
+      <p>
         Authenticated At: {{session.data.authenticated.cognitoUser.authenticatedAt}}
       </p>
       <p>
@@ -22,9 +40,6 @@
       </p>
       <p>
         Expires: {{session.data.authenticated.cognitoUser.expiresAt}}
-      </p>
-      <p>
-        {{session.data.authenticated.cognitoUser.jti}}
       </p>
     </div>
   </div>

@@ -33,7 +33,5 @@ export default Controller.extend({
     }
   },
 
-  awsAmplifyAuthService: service(),
-
-  notify: service()
+  awsAmplifyAuthService: service()
 });

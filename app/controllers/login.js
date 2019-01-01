@@ -11,7 +11,5 @@ export default Controller.extend({
     }
   },
 
-  notify: service(),
-
   session: service()
 });
