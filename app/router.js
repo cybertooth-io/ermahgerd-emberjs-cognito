@@ -27,8 +27,6 @@ Router.map(function () {
       this.route('address');
       this.route('locale-timezone');
     });
-    this.route('change-password');
-    this.route('update-profile');
   });
   this.route('login');
   this.route('sign-up');
