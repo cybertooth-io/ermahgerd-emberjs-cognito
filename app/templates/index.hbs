@@ -6,7 +6,12 @@
       debitis deserunt distinctio hic impedit maiores mollitia officia pariatur saepe sit unde vel vero voluptatem!
     </p>
     <p>
-      {{#link-to "protected.index"}}Protected Page{{/link-to}}
+      {{#link-to "protected.index"}}
+        Protected Page
+        {{#unless session.isAuthenticated}}
+          (sign-in required)
+        {{/unless}}
+      {{/link-to}}
     </p>
   </div>
 </section>

@@ -1,14 +1,22 @@
 <section class="my-3">
   <div class="container">
-    <div class="d-flex my-3">
-      <h1 class="flex-fill">Configuration</h1>
-      <div class="align-self-center">
+    <div class="align-items-center d-flex my-3">
+      <h1 class="flex-fill h5">
+        Configuration
+      </h1>
+      <div class="align-self-center btn-group">
+        <button class="btn btn-outline-secondary" disabled="disabled" type="button">
+          {{fa-icon "question"}}
+        </button>
       </div>
     </div>
 
     <div class="list-group">
-      {{#link-to "protected.configuration.roles.index" class="list-group-item"}}
+      {{#link-to "protected.configuration.roles.index" class="list-group-item list-group-item-action"}}
         Roles
+      {{/link-to}}
+      {{#link-to "protected.configuration.users.index" class="list-group-item list-group-item-action"}}
+        Users
       {{/link-to}}
     </div>
   </div>

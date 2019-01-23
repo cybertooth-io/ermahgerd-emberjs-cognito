@@ -1,0 +1,39 @@
+<fieldset>
+  <legend>Update Profile</legend>
+  <form class="form" onsubmit={{action (route-action "update" session model)}}>
+    <div class="form-group">
+      <label for="js-locale" class="control-label">Locale</label>
+      {{input-text
+        aria-describedby="js-locale-help"
+        autofocus=true
+        class="form-control"
+        id="js-locale"
+        placeholder="en_ca"
+        type="text"
+        value=model.locale
+      }}
+      <small id="js-locale-help" class="form-text text-muted">
+        What is your default locale for formatting dates and numbers?
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="js-zoneinfo" class="control-label">Timezone</label>
+      {{input-text
+        aria-describedby="js-zoneinfo-help"
+        class="form-control"
+        id="js-zoneinfo"
+        placeholder="America/Edmonton"
+        type="text"
+        value=model.zoneinfo
+      }}
+      <small id="js-zoneinfo-help" class="form-text text-muted">
+        What is your default timezone?
+      </small>
+    </div>
+    <div class="form-group text-right">
+      <button class="btn btn-outline-primary" type="submit">
+        Update
+      </button>
+    </div>
+  </form>
+</fieldset>

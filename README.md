@@ -69,21 +69,36 @@ yarn add --dev @fortawesome/free-solid-svg-icons
 yarn add --dev @fortawesome/free-regular-svg-icons
 yarn add --dev @fortawesome/free-brands-svg-icons
 
-# SASS for stylesheets; make sure to renamed app/styles/app.css -> app/styles/app.scss
-ember install ember-cli-sass
+# For importing libraries (replaces ember-browserify); needed for: `import Auth from '@aws-amplify/Auth'
+ember install ember-auto-import
 
 # Bootstrap 4 support; bring it all in looks like bootstrap@^4.1.0 comes in, should be bootstrap@~4.1.0 
 ember install ember-cli-bootstrap-4
 
-# For importing libraries (replaces ember-browserify); needed for: `import Auth from '@aws-amplify/Auth'
-ember install ember-auto-import
+# Get gravatar images
+ember install ember-cli-gravatar
+
+# SASS for stylesheets; make sure to renamed app/styles/app.css -> app/styles/app.scss
+ember install ember-cli-sass
+
+# Text and Textarea components that don't fail to autofocus
+ember install ember-cli-text-support-mixins
+
+# Used to manipulate arrays template-side
+ember install ember-composable-helpers
+
+# Used to format dates
+ember install ember-helper-locale-date
+
+# using QRCode.js to create QR codes for Authenticator apps (e.g. Google Authenticator)
+ember install ember-qrcode-shim
+
+# Encouraged to stop using this, but I actually love this helper
+ember install ember-route-action-helper
 
 # For authentication
 yarn add @aws-amplify/core -D
 yarn add @aws-amplify/auth -D
-
-# Encouraged to stop using this, but I actually love this helper
-ember install ember-route-action-helper
 ```
 
 #### `config/environment.js`

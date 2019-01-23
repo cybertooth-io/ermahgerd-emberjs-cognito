@@ -1,0 +1,117 @@
+{{#if session.mfaDisabled?}}
+  <div class="alert alert-info">
+    <p><strong>FAQ</strong></p>
+    <ul>
+      <li>
+        <strong>What do I need?</strong> -
+        An authenticator app on your mobile device. Check out Google Authenticator
+        <a
+          href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_CA"
+          rel="noopener" target="_blank">
+          (Android
+        </a>
+        |
+        <a href="https://itunes.apple.com/ca/app/google-authenticator/id388497605?mt=8"
+           rel="noopener" target="_blank">
+          iOS)
+        </a>
+        or Microsoft's Authenticator (I'm not even linking to that app because I hate it).
+      </li>
+      <li>
+        <strong>Can I use SMS codes instead?</strong> -
+        Nope. I'm not supporting SMS codes because sending the messages can be expensive to everyone. Get
+        an authenticator app!
+      </li>
+    </ul>
+  </div>
+{{/if}}
+<fieldset>
+  {{#if session.mfaEnabled?}}
+    <legend>Multi-Factor Authentication Is <span class="text-success">Enabled</span></legend>
+    <form class="form" onsubmit={{action (route-action "disable" session)}}>
+      <div class="form-group text-center">
+        <button class="btn btn-lg btn-outline-secondary" type="submit">
+          Deactivate Multi-Factor Authentication
+        </button>
+      </div>
+    </form>
+  {{else}}
+    {{#if model.mfaActivationState.step1?}}
+      <legend>Verify Authenticator</legend>
+      <form class="form" onsubmit={{action (route-action "verify" session model.mfaActivationState)}}>
+        <div class="form-group">
+          <label class="control-label">QR Code</label>
+          {{qr-code correctLevel="L" text=model.mfaActivationState.qrcUrl}}
+          <small class="form-text text-muted">
+            Use your authenticator app to scan this QRC.
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="js-passcode-one" class="control-label">Passcode 1 of 2</label>
+          {{input-text
+            aria-describedby="js-passcode-one-help"
+            autofocus=true
+            class="form-control"
+            id="js-passcode-one"
+            maxlength=6
+            placeholder="Passcode"
+            type="number"
+            value=model.mfaActivationState.passcodeOne
+          }}
+          <small id="js-passcode-one-help" class="form-text text-muted">
+            What is current code from your Authenticator app?
+          </small>
+        </div>
+        <div class="form-group text-right">
+          <div class="btn-group">
+            <button class="btn btn-outline-secondary" onclick={{action (route-action "cancel")}} type="button">
+              Cancel
+            </button>
+            <button class="btn btn-outline-primary" type="submit">
+              Next
+            </button>
+          </div>
+        </div>
+      </form>
+    {{else if model.mfaActivationState.step2?}}
+      <legend>Finalize Authenticator Setup</legend>
+      <form class="form" onsubmit={{action (route-action "finalize" session model.mfaActivationState)}}>
+        <div class="form-group">
+          <label for="js-passcode-two" class="control-label">Passcode 2 of 2</label>
+          {{input-text
+            aria-describedby="js-passcode-two-help"
+            autofocus=true
+            class="form-control"
+            id="js-passcode-two"
+            maxlength=6
+            placeholder="Passcode"
+            type="number"
+            value=model.mfaActivationState.passcodeTwo
+          }}
+          <small id="js-passcode-two-help" class="form-text text-muted">
+            What is next code from your Authenticator app?
+          </small>
+        </div>
+        <div class="form-group text-right">
+          <div class="btn-group">
+            <button class="btn btn-outline-secondary" onclick={{action (route-action "cancel")}} type="button">
+              Cancel
+            </button>
+            <button class="btn btn-outline-primary" type="submit">
+              Finish
+            </button>
+          </div>
+        </div>
+      </form>
+    {{else}}
+      <legend>Multi-Factor Authentication Is <span class="text-danger">Disabled</span></legend>
+      <form class="form" onsubmit={{action (route-action "enable" session)}}>
+        <div class="form-group text-center">
+          <button class="btn btn-lg btn-outline-primary" type="submit">
+            Activate Multi-Factor Authentication
+          </button>
+        </div>
+      </form>
+    {{/if}}
+  {{/if}}
+</fieldset>

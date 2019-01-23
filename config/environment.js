@@ -26,6 +26,8 @@ module.exports = function (environment) {
       'ember-simple-auth-aws-amplify': {
         awsAmplifyAuth: {
           config: {
+            // https://aws-amplify.github.io/docs/js/authentication#switching-authentication-flow-type (USER_SRP_AUTH is default)
+            authenticationFlowType: 'USER_SRP_AUTH',
             // Amazon Cognito Region
             region: 'ca-central-1',
             // Amazon Cognito User Pool ID
@@ -38,15 +40,8 @@ module.exports = function (environment) {
         headerAuthorization: 'Authorization',
 
         headerIdentification: 'Identification',
-        /**
-         * AWS Cognito's REFRESH tokens expire after 30 days by default.  This is configurable in your AWS Cognito
-         * pools through the CLI or AWS Web Console.
-         *
-         * If you change your refresh token expiry you can let your app know about this.
-         *
-         * Currently we do not use this information for anything.
-         */
-        refreshTokenExpiryInDays: 30
+
+        totpIssuerName: 'Ermahgerd',
       }
     }
   };

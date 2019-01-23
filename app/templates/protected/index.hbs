@@ -1,11 +1,15 @@
 <section class="my-3">
   <div class="container">
     <div class="d-flex my-3">
-      <h1 class="flex-fill"><span class="text-success">Protected</span> Path</h1>
+      <h1 class="flex-fill">
+        <span class="text-success">Protected</span> Path
+        <small class="text-muted">
+          Welcome {{session.data.authenticated.attributes.given_name}}
+        </small>
+      </h1>
       <div class="align-self-center">
       </div>
     </div>
-
     <div>
       <p>
         Welcome to the protected index page that you can only get to once you have logged in. Check
@@ -15,16 +19,27 @@
         {{#link-to "index"}}Public Page{{/link-to}}
       </p>
       <p>
-        Authenticated At: {{session.data.authenticated.cognitoUser.authenticatedAt}}
+        User Name: {{session.username}}
       </p>
       <p>
-        Issued: {{session.data.authenticated.cognitoUser.issuedAt}}
+        Email Verified: {{session.emailVerified?}}
       </p>
       <p>
-        Expires: {{session.data.authenticated.cognitoUser.expiresAt}}
+        MFA Enabled: {{session.mfaEnabled?}}
       </p>
       <p>
-        {{session.data.authenticated.cognitoUser.jti}}
+        Groups
+        ({{session.groups.length}}):
+        {{join ", " session.groups}}
+      </p>
+      <p>
+        Authenticated At: {{date-short-llllz session.authenticatedAt}}
+      </p>
+      <p>
+        Issued: {{date-short-llllz session.issuedAt}}
+      </p>
+      <p>
+        Expires: {{date-short-llllz session.expiresAt}}
       </p>
     </div>
   </div>

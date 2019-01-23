@@ -4,8 +4,12 @@ import Route from '@ember/routing/route';
 export default Route.extend(ApplicationRouteMixin, {
   actions: {
     error() {
-      console.error('SOME ERROR', arguments);
+      console.error('Application Error Substate', arguments);
       return true;
+    },
+
+    logout(session) {
+      session.invalidate();
     }
   },
 

@@ -23,26 +23,30 @@
         <ul class="navbar-nav">
           {{#if session.isAuthenticated}}
             <li class="nav-item">
+              {{#link-to "protected.index" class="nav-link"}}
+                Home
+              {{/link-to}}
+            </li>
+            <li class="nav-item">
               {{#link-to "protected.configuration.index" class="nav-link"}}
                 Configuration
               {{/link-to}}
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick={{action "logout" session}}>
-                Logout
+              {{#link-to "protected.profile.index" class="nav-link"}}
+                Profile
+              {{/link-to}}
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick={{action (route-action "logout" session)}}>
+                Sign Out
               </a>
             </li>
           {{else}}
             <li class="nav-item">
-              {{#link-to "sign-up" class="nav-link"}}
-                Sign Up
-              {{/link-to}}
-            </li>
-            <div class="dropdown-divider"></div>
-            <li class="nav-item">
               {{#link-to "login" class="nav-link"}}
-                Login
+                Sign In
               {{/link-to}}
             </li>
           {{/if}}
@@ -55,34 +59,42 @@
     {{#if session.isAuthenticated}}
       <div class="btn-group d-none d-md-flex ml-auto" role="group" aria-label="Go & Sign Out">
         <div class="btn-group">
-          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="js-navbar-go-dropdown"
                   data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
             Go
           </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            {{#link-to "protected.configuration.index" class="dropdown-item"}}
-              Configuration
-            {{/link-to}}
-            <div class="dropdown-divider"></div>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="js-navbar-go-dropdown">
             {{#link-to "protected.index" class="dropdown-item"}}
               Home
             {{/link-to}}
+            <div class="dropdown-divider"></div>
+            {{#link-to "protected.configuration.index" class="dropdown-item"}}
+              Configuration
+            {{/link-to}}
           </div>
         </div>
-        <button
-          onclick={{action "logout" session}}
-          class="btn btn-outline-primary btn-sm d-none d-md-flex" type="button">
-          Logout
-        </button>
+        <div class="btn-group">
+          <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="js-navbar-me-dropdown"
+                  data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            Me
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="js-navbar-me-dropdown">
+            {{#link-to "protected.profile.index" class="dropdown-item"}}
+              Profile
+            {{/link-to}}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:void(0);" onclick={{action (route-action "logout" session)}}>
+              Sign Out
+            </a>
+          </div>
+        </div>
       </div>
     {{else}}
-      <div class="btn-group d-none d-md-flex ml-auto" role="group" aria-label="Sign In & Sign Up">
-        {{#link-to "sign-up" class="btn btn-outline-info btn-sm"}}
-          Sign Up
-        {{/link-to}}
+      <div class="btn-group d-none d-md-flex ml-auto" role="group" aria-label="Sign In">
         {{#link-to "login" class="btn btn-outline-primary btn-sm"}}
-          Login
+          Sign In
         {{/link-to}}
       </div>
     {{/if}}
@@ -91,4 +103,4 @@
 
 {{outlet}}
 
-{{ember-notify}}
+{{ember-notify closeAfter=5000 messageStyle="bootstrap"}}
