@@ -1,0 +1,45 @@
+<section class="my-3">
+  <div class="container">
+    <div class="align-items-center d-flex my-3">
+      <h1 class="flex-fill h5">
+        {{#link-to "protected.configuration.index"}}
+          Configuration
+        {{/link-to}}
+        {{fa-icon "caret-right" fixedWidth=true}}
+        Users
+      </h1>
+      <div class="align-self-center btn-group">
+        <button class="btn btn-outline-secondary" disabled="disabled" type="button">
+          {{fa-icon "plus"}}
+        </button>
+        <button class="btn btn-outline-secondary" disabled="disabled" type="button">
+          {{fa-icon "question"}}
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <p class="small text-muted">
+        {{model.users.length}}
+        of
+        {{model.usersCount}}
+      </p>
+    </div>
+    <div class="list-group">
+      {{#each model.users as |user|}}
+        {{#link-to "protected.configuration.users.user.index" user.id
+                   class="align-items-center d-flex justify-content-between list-group-item list-group-item-action"
+        }}
+          {{user.email}}
+          <small class="text-muted text-right">
+            {{date-short-llll user.updatedAt}}
+          </small>
+        {{/link-to}}
+      {{else}}
+        <div class="list-group-item">
+          <em>None</em>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

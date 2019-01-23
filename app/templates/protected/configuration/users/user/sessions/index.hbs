@@ -1,0 +1,37 @@
+<table class="table table-responsive-sm table-responsive-xs">
+  <caption>
+    {{model.sessions.length}}
+    of
+    {{model.sessionsCount}}
+  </caption>
+  <thead>
+    <tr>
+      <th>Authenticated</th>
+      <th>Created</th>
+      <th>Browser</th>
+      <th>Platform</th>
+      <th>Source IP</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.sessions as |session|}}
+      <tr>
+        <td>
+          {{date-short-lll session.authenticatedAt}}
+        </td>
+        <td>
+          {{date-short-lll session.createdAt}}
+        </td>
+        <td>
+          {{session.browser}}-{{session.browserVersion}}
+        </td>
+        <td>
+          {{session.platform}}-{{session.platformVersion}}
+        </td>
+        <td>
+          {{session.ipAddress}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

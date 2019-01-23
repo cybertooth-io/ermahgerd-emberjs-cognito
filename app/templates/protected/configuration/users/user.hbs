@@ -1,0 +1,46 @@
+<section class="my-3">
+  <div class="container">
+    <div class="align-items-center d-flex my-3">
+      <h1 class="flex-fill h5">
+        {{#link-to "protected.configuration.index"}}
+          Configuration
+        {{/link-to}}
+        {{fa-icon "caret-right" fixedWidth=true}}
+        {{#link-to "protected.configuration.users.index"}}
+          Users
+        {{/link-to}}
+        {{fa-icon "caret-right" fixedWidth=true}}
+        {{model.email}}
+      </h1>
+      <div class="align-self-center btn-group">
+        <button class="btn btn-outline-secondary" disabled="disabled" type="button">
+          {{fa-icon "question"}}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 pt-2">
+        <div class="list-group">
+          {{#link-to "protected.configuration.users.user.index" class="list-group-item list-group-item-action"}}
+            Summary
+          {{/link-to}}
+          {{#link-to "protected.configuration.users.user.sessions.index"
+                     class="align-items-center d-flex justify-content-between list-group-item list-group-item-action"
+          }}
+            Sessions
+            <span class="badge badge-secondary badge-pill">
+              {{model.sessions.length}}
+            </span>
+          {{/link-to}}
+        </div>
+      </div>
+      <div class="col-sm-9 pt-2">
+        {{outlet}}
+      </div>
+    </div>
+  </div>
+</section>

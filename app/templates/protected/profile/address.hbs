@@ -1,0 +1,40 @@
+<fieldset>
+  <legend>Update Profile</legend>
+  <form class="form" onsubmit={{action (route-action "update" session model)}}>
+    <div class="form-group">
+      <label for="js-address" class="control-label">Address</label>
+      {{text-area
+        aria-describedby="js-address"
+        autofocus=true
+        class="form-control"
+        ctrlEnterSubmitsForm?=true
+        id="js-address"
+        placeholder="Address"
+        value=model.address
+      }}
+      <small id="js-address" class="form-text text-muted">
+        What is your address?
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="js-phone-number" class="control-label">Phone Number</label>
+      {{input-text
+        aria-describedby="js-phone-number-help"
+        class="form-control"
+        id="js-phone-number"
+        pattern="^(?=(?:\+|0{2})?(?:(?:[\(\-\)\.\/ \t\f]*\d){7,10})?(?:[\-\.\/ \t\f]?\d{2,3})(?:[\-\s]?[ext]{1,3}[\-\.\/ \t\f]?\d{1,4})?$)((?:\+|0{2})\d{0,3})?(?:[\-\.\/ \t\f]?)(\(0\d[ ]?\d{0,4}\)|\(\d{0,4}\)|\d{0,4})(?:[\-\.\/ \t\f]{0,2}\d){3,8}(?:[\-\s]?(?:x|ext)[\-\t\f ]?(\d{1,4}))?$"
+        placeholder="+19875551234"
+        type="tel"
+        value=model.phone_number
+      }}
+      <small id="js-phone-number-help" class="form-text text-muted">
+        What is your phone number?
+      </small>
+    </div>
+    <div class="form-group text-right">
+      <button class="btn btn-outline-primary" type="submit">
+        Update
+      </button>
+    </div>
+  </form>
+</fieldset>

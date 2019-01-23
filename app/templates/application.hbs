@@ -34,30 +34,19 @@
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item">
-              {{#link-to "protected.update-profile" class="nav-link"}}
-                Update Profile
+              {{#link-to "protected.profile.index" class="nav-link"}}
+                Profile
               {{/link-to}}
             </li>
             <li class="nav-item">
-              {{#link-to "protected.change-password" class="nav-link"}}
-                Change Password
-              {{/link-to}}
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick={{action "logout" session}}>
-                Logout
+              <a class="nav-link" href="#" onclick={{action (route-action "logout" session)}}>
+                Sign Out
               </a>
             </li>
           {{else}}
             <li class="nav-item">
-              {{#link-to "sign-up" class="nav-link"}}
-                Sign Up
-              {{/link-to}}
-            </li>
-            <div class="dropdown-divider"></div>
-            <li class="nav-item">
               {{#link-to "login" class="nav-link"}}
-                Login
+                Sign In
               {{/link-to}}
             </li>
           {{/if}}
@@ -76,12 +65,12 @@
             Go
           </button>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="js-navbar-go-dropdown">
-            {{#link-to "protected.configuration.index" class="dropdown-item"}}
-              Configuration
-            {{/link-to}}
-            <div class="dropdown-divider"></div>
             {{#link-to "protected.index" class="dropdown-item"}}
               Home
+            {{/link-to}}
+            <div class="dropdown-divider"></div>
+            {{#link-to "protected.configuration.index" class="dropdown-item"}}
+              Configuration
             {{/link-to}}
           </div>
         </div>
@@ -92,26 +81,20 @@
             Me
           </button>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="js-navbar-me-dropdown">
-            {{#link-to "protected.update-profile" class="dropdown-item"}}
-              Update Profile
-            {{/link-to}}
-            {{#link-to "protected.change-password" class="dropdown-item"}}
-              Change Password
+            {{#link-to "protected.profile.index" class="dropdown-item"}}
+              Profile
             {{/link-to}}
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="javascript:void(0);" onclick={{action "logout" session}}>
-              Logout
+            <a class="dropdown-item" href="javascript:void(0);" onclick={{action (route-action "logout" session)}}>
+              Sign Out
             </a>
           </div>
         </div>
       </div>
     {{else}}
-      <div class="btn-group d-none d-md-flex ml-auto" role="group" aria-label="Sign In & Sign Up">
-        {{#link-to "sign-up" class="btn btn-outline-info btn-sm"}}
-          Sign Up
-        {{/link-to}}
+      <div class="btn-group d-none d-md-flex ml-auto" role="group" aria-label="Sign In">
         {{#link-to "login" class="btn btn-outline-primary btn-sm"}}
-          Login
+          Sign In
         {{/link-to}}
       </div>
     {{/if}}

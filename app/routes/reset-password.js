@@ -6,27 +6,19 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   actions: {
-    setPassword(username, code, password) {
-      this.get('awsAmplifyAuthService')
-        .forgotPasswordSubmit(username, code, password)
+    setPassword(session, username, code, password) {
+      session
+        .resetPassword(username, code, password)
         .then(() => {
           this.transitionTo('login', { queryParams: { username: username } })
             .then(newRoute => {
-              newRoute.get('notify').success('Now use your new password to sign in.');
+              newRoute.get('notify').success('Now use your new password to sign in.', { closeAfter: null });
             })
         })
-        .catch(response => {
-          console.warn('Error', response);
-          this.get('notify').error('Your password could not be set.');
-        });
+        .catch(response => this.get('notify').error(response.message));
       return false;
     }
   },
-
-  /**
-   * @see `ember-simple-auth-aws-amplify`
-   */
-  awsAmplifyAuthService: service(),
 
   model(params) {
     return hash({
@@ -38,5 +30,7 @@ export default Route.extend({
 
   queryParams: {
     username: { refreshModel: false }
-  }
+  },
+
+  session: service()
 });

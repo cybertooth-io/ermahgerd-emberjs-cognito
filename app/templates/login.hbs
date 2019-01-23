@@ -1,43 +1,84 @@
 <section class="my-3">
   <div class="container">
     <div class="row">
-      <div class="offset-md-3 col-md-6">
+      <div class="offset-md-2 col-md-8">
         <fieldset>
-          <legend>Sign In</legend>
-          <form class="form" onsubmit={{action "login" session model.username model.password}}>
-            <div class="form-group">
-              <label for="js-username" class="control-label">Email Address</label>
-              {{input
-                aria-describedby="js-username-help"
-                autocomplete="email"
-                autofocus=true
-                class="form-control"
-                id="js-username"
-                placeholder="Email Adddress"
-                type="email"
-                value=model.username
-              }}
-              <small id="js-username-help" class="form-text text-muted">Your email address.</small>
-            </div>
-            <div class="form-group">
-              <label for="js-password" class="control-label">Password</label>
-              {{input
-                aria-describedby="js-password-help"
-                autocomplete="current-password"
-                class="form-control"
-                placeholder="Password"
-                type="password"
-                value=model.password
-              }}
-              <small id="js-password-help" class="form-text text-muted">Your password.</small>
-            </div>
-            <div class="form-group text-right">
-              {{#link-to "forgot-password" class="btn btn-link text-danger"}}Forgot Password{{/link-to}}
-              <button class="btn btn-outline-primary" type="submit">
-                Submit
-              </button>
-            </div>
-          </form>
+          {{#if model.authenticationState.mfaRequired?}}
+            <legend>Multi-Factor Authentication</legend>
+            {{!-- ------------------------------------------------------------------------------- MFA Passcode Form --}}
+            <form class="form"
+                  onsubmit={{action (route-action "confirmSignIn" model.authenticationState model.mfaCode)}}>
+              <div class="form-group">
+                <label for="js-mfa-code" class="control-label">
+                  {{model.authenticationState.mfaChallengeDevice}} Code
+                </label>
+                {{input-text
+                  aria-describedby="js-mfa-code-help"
+                  autofocus=true
+                  class="form-control"
+                  id="js-mfa-code"
+                  maxlength=6
+                  placeholder="Authenticator Code"
+                  type="number"
+                  value=model.mfaCode
+                }}
+                <small id="js-mfa-code-help" class="form-text text-muted">
+                  What is current code from your Authenticator app named {{model.authenticationState.challengeName}}?
+                </small>
+              </div>
+              <div class="form-group">
+                <div class="alert alert-info">
+                  <p><strong>This browser will be remembered.</strong></p>
+                  <p>
+                    After you verify your identity with your Multi-Factor authentication you won't be asked for
+                    the code on subsequent sign ins within this browser.
+                  </p>
+                </div>
+              </div>
+              <div class="form-group text-right">
+                <button class="btn btn-outline-primary" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          {{else}}
+            <legend>Sign In</legend>
+            {{!-- ------------------------------------------------------------------------------------ Sign In Form --}}
+            <form class="form" onsubmit={{action (route-action "signIn" model.username model.password)}}>
+              <div class="form-group">
+                <label for="js-username" class="control-label">Email Address</label>
+                {{input-text
+                  aria-describedby="js-username-help"
+                  autocomplete="email"
+                  autofocus=true
+                  class="form-control"
+                  id="js-username"
+                  placeholder="Email Adddress"
+                  type="email"
+                  value=model.username
+                }}
+                <small id="js-username-help" class="form-text text-muted">Your email address.</small>
+              </div>
+              <div class="form-group">
+                <label for="js-password" class="control-label">Password</label>
+                {{input-text
+                  aria-describedby="js-password-help"
+                  autocomplete="current-password"
+                  class="form-control"
+                  placeholder="Password"
+                  type="password"
+                  value=model.password
+                }}
+                <small id="js-password-help" class="form-text text-muted">Your password.</small>
+              </div>
+              <div class="form-group text-right">
+                {{#link-to "forgot-password" class="btn btn-link text-danger"}}Forgot Password{{/link-to}}
+                <button class="btn btn-outline-primary" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          {{/if}}
         </fieldset>
       </div>
     </div>

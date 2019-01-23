@@ -1,10 +1,19 @@
 <section class="my-3">
   <div class="container">
-    <div class="d-flex my-3">
-      <h1 class="flex-fill">Roles</h1>
-      <div class="align-self-center">
+    <div class="align-items-center d-flex my-3">
+      <h1 class="flex-fill h5">
+        {{#link-to "protected.configuration.index"}}
+          Configuration
+        {{/link-to}}
+        {{fa-icon "caret-right" fixedWidth=true}}
+        Roles
+      </h1>
+      <div class="align-self-center btn-group">
         <button class="btn btn-outline-secondary" disabled="disabled" type="button">
           {{fa-icon "plus"}}
+        </button>
+        <button class="btn btn-outline-secondary" disabled="disabled" type="button">
+          {{fa-icon "question"}}
         </button>
       </div>
     </div>
@@ -18,10 +27,10 @@
     </div>
     <div class="list-group">
       {{#each model.roles as |role|}}
-        <div class="d-flex list-group-item">
+        <div class="align-items-center d-flex justify-content-between list-group-item">
           {{role.name}}
-          <small class="ml-auto text-muted">
-            {{role.updatedAt}}
+          <small class="text-muted text-right">
+            {{date-short-llll role.updatedAt}}
           </small>
         </div>
       {{else}}

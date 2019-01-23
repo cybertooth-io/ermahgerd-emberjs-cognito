@@ -4,7 +4,7 @@
       <h1 class="flex-fill">
         <span class="text-success">Protected</span> Path
         <small class="text-muted">
-          Welcome {{session.data.authenticated.cognitoUser.attributes.given_name}}
+          Welcome {{session.data.authenticated.attributes.given_name}}
         </small>
       </h1>
       <div class="align-self-center">
@@ -19,27 +19,27 @@
         {{#link-to "index"}}Public Page{{/link-to}}
       </p>
       <p>
-        User Name: {{session.data.authenticated.cognitoUser.cognitoUsername}}
+        User Name: {{session.username}}
       </p>
       <p>
-        Email Verified: {{session.data.authenticated.cognitoUser.emailVerified?}}
+        Email Verified: {{session.emailVerified?}}
       </p>
       <p>
-        MFA Enabled: {{session.data.authenticated.cognitoUser.mfaEnabled?}}
+        MFA Enabled: {{session.mfaEnabled?}}
       </p>
       <p>
         Groups
-        ({{session.data.authenticated.cognitoUser.cognitoGroups.length}}):
-        {{join ", " session.data.authenticated.cognitoUser.cognitoGroups}}
+        ({{session.groups.length}}):
+        {{join ", " session.groups}}
       </p>
       <p>
-        Authenticated At: {{session.data.authenticated.cognitoUser.authenticatedAt}}
+        Authenticated At: {{date-short-llllz session.authenticatedAt}}
       </p>
       <p>
-        Issued: {{session.data.authenticated.cognitoUser.issuedAt}}
+        Issued: {{date-short-llllz session.issuedAt}}
       </p>
       <p>
-        Expires: {{session.data.authenticated.cognitoUser.expiresAt}}
+        Expires: {{date-short-llllz session.expiresAt}}
       </p>
     </div>
   </div>
