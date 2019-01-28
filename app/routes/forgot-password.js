@@ -1,4 +1,5 @@
 import { hash } from 'rsvp';
+import { getWithDefault } from '@ember/object';
 import Route from '@ember/routing/route';
 
 export default Route.extend({
@@ -17,9 +18,13 @@ export default Route.extend({
     }
   },
 
-  model() {
+  model(params) {
     return hash({
-      username: ''
+      username: getWithDefault(params, 'email', '')
     });
+  },
+
+  queryParams: {
+    email: { refreshModel: true }
   }
 });

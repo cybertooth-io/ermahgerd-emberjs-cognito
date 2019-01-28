@@ -10,12 +10,15 @@ export default BaseModel.extend({
   browser: DS.attr('string'),
   browserVersion: DS.attr('string'),
   device: DS.attr('string'),
+  invalidatedAt: DS.attr('date'),
   ipAddress: DS.attr('string'),
   platform: DS.attr('string'),
   platformVersion: DS.attr('string'),
 
   /** Relationships
    * ---------------------------------------------------------------------------------------------------------------- */
+
+  invalidatedBy: DS.belongsTo('user'),
 
   user: DS.belongsTo('user')
 });

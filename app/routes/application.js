@@ -9,7 +9,12 @@ export default Route.extend(ApplicationRouteMixin, {
     },
 
     logout(session) {
-      session.invalidate();
+      this.get('store')
+        .peekAll('current-user')
+        .get('firstObject')
+        .signOut()
+        .finally(() => this.get('store').unloadAll('current-user'))
+        .finally(() => session.invalidate())
     }
   },
 

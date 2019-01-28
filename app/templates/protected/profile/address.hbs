@@ -2,7 +2,7 @@
   <legend>Update Profile</legend>
   <form class="form" onsubmit={{action (route-action "update" session model)}}>
     <div class="form-group">
-      <label for="js-address" class="control-label">Address</label>
+      <label for="js-address">Address</label>
       {{text-area
         aria-describedby="js-address"
         autofocus=true
@@ -17,7 +17,7 @@
       </small>
     </div>
     <div class="form-group">
-      <label for="js-phone-number" class="control-label">Phone Number</label>
+      <label for="js-phone-number">Phone Number</label>
       {{input-text
         aria-describedby="js-phone-number-help"
         class="form-control"

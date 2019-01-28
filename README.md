@@ -69,6 +69,12 @@ yarn add --dev @fortawesome/free-solid-svg-icons
 yarn add --dev @fortawesome/free-regular-svg-icons
 yarn add --dev @fortawesome/free-brands-svg-icons
 
+# Ember Select Boxes - this addon is great
+ember install @zestia/ember-select-box
+
+# For custom actions that aren't normal REST end points; e.g. `current-user` needs a `sign-out` endpoint.
+ember install ember-api-actions
+
 # For importing libraries (replaces ember-browserify); needed for: `import Auth from '@aws-amplify/Auth'
 ember install ember-auto-import
 

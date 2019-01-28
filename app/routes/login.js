@@ -6,6 +6,18 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 
 export default Route.extend(UnauthenticatedRouteMixin, {
   actions: {
+    completePassword(authenticationState, newPassword, additionalAttributes = {}/*, submitEvent*/) {
+      this.get('session')
+        .completePassword(authenticationState, newPassword, additionalAttributes)
+        .then(authenticationState => {
+          if (authenticationState.get('mfaRequired?')) {
+            set(this, 'controller.model.authenticationState', authenticationState);
+          }
+        })
+        .catch(response => this.get('notify').error(response.message));
+      return false;
+    },
+
     confirmSignIn(authenticationState, code) {
       this.get('session')
         .confirmSignIn(authenticationState, code)
@@ -18,7 +30,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
       this.get('session')
         .signIn(username, password)
         .then(authenticationState => {
-          if (authenticationState.get('mfaRequired?')) {
+          if (authenticationState.get('mfaRequired?') || authenticationState.get('newPasswordRequired?')) {
             set(this, 'controller.model.authenticationState', authenticationState);
           }
         })
@@ -32,8 +44,10 @@ export default Route.extend(UnauthenticatedRouteMixin, {
 
   model(params) {
     return {
+      additionalAttributes: {},
       authenticationState: {},  // will be set during sign in if MFA is enabled
       mfaCode: '',
+      newPassword: '',
       password: '',
       username: isNone(get(params, 'username')) ? '' : get(params, 'username')
     }

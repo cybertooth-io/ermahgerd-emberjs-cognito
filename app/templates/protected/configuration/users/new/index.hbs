@@ -1,0 +1,73 @@
+<section class="my-3">
+  <div class="container">
+    <div class="align-items-center d-flex my-3">
+      <h1 class="flex-fill h5">
+        {{#link-to "protected.configuration.index"}}
+          Configuration
+        {{/link-to}}
+        {{fa-icon "caret-right" fixedWidth=true}}
+        {{#link-to "protected.configuration.users.index"}}
+          Users
+        {{/link-to}}
+        {{fa-icon "caret-right" fixedWidth=true}}
+        New User
+      </h1>
+      <div class="align-self-center btn-group">
+        <button class="btn btn-outline-secondary" disabled="disabled" type="button">
+          {{fa-icon "question"}}
+        </button>
+      </div>
+    </div>
+    <form class="form" onsubmit={{action (route-action "save" model.user)}}>
+      <div class="form-group">
+        <label for="js-username">Email Address</label>
+        {{input
+          aria-describedby="js-username-help"
+          autocomplete="off"
+          autofocus=true
+          class="form-control"
+          placeholder="Email Address"
+          type="email"
+          value=model.user.email
+        }}
+        <small id="js-username-help" class="form-text text-muted">
+          What is the new user's email address?
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="js-roles">Choose Roles</label>
+        <NativeSelectBox class="form-control" @on-select={{action (route-action "chooseRole" model.user)}} as |sb|>
+          <option value="">Choose Role(s)</option>
+          {{#each model.roles as |role|}}
+            <sb.option @value={{role}}>{{role.name}}</sb.option>
+          {{/each}}
+        </NativeSelectBox>
+        <small id="js-roles-help" class="form-text text-muted">
+          What roles do you want the user to belong to?
+        </small>
+      </div>
+      <div class="form-group">
+        <label>Assigned Roles</label>
+        <div class="list-group">
+          {{#each model.user.roles as |role|}}
+            <div class="list-group-item">
+              {{role.name}}
+            </div>
+          {{else}}
+            <div class="list-group-item">
+              <em>No Roles Assigned</em>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="form-group text-right">
+        <div class="btn-group">
+          <button class="btn btn-outline-primary" type="submit">Create</button>
+          {{#link-to "protected.configuration.users.index" class="btn btn-outline-secondary"}}
+            Cancel
+          {{/link-to}}
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

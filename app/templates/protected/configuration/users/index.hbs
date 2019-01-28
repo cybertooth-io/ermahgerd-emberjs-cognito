@@ -9,9 +9,9 @@
         Users
       </h1>
       <div class="align-self-center btn-group">
-        <button class="btn btn-outline-secondary" disabled="disabled" type="button">
+        {{#link-to "protected.configuration.users.new.index" class="btn btn-outline-secondary"}}
           {{fa-icon "plus"}}
-        </button>
+        {{/link-to}}
         <button class="btn btn-outline-secondary" disabled="disabled" type="button">
           {{fa-icon "question"}}
         </button>
@@ -30,7 +30,13 @@
         {{#link-to "protected.configuration.users.user.index" user.id
                    class="align-items-center d-flex justify-content-between list-group-item list-group-item-action"
         }}
-          {{user.email}}
+          <div>
+            {{user.email}}
+            {{#if user.notInCognito?}}
+              -
+              <small class="text-muted">Not In Cognito</small>
+            {{/if}}
+          </div>
           <small class="text-muted text-right">
             {{date-short-llll user.updatedAt}}
           </small>

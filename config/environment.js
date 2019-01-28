@@ -31,9 +31,9 @@ module.exports = function (environment) {
             // Amazon Cognito Region
             region: 'ca-central-1',
             // Amazon Cognito User Pool ID
-            userPoolId: 'ca-central-1_ocRK2nsIR',
-            // Amazon Cognito Web Client ID (26-char alphanumeric string)
-            userPoolWebClientId: '5ht2oa80l95idve05t3q5ir10u',
+            userPoolId: 'ca-central-1_gVEm5uxH5',
+            // Amazon Cognito Web Client ID (26-char alphanumeric string) -> `App integration - App client settings`
+            userPoolWebClientId: '20fb6agrojrv318os33svrhe9u',
           }
         },
 

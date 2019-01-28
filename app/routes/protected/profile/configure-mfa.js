@@ -37,20 +37,13 @@ export default Route.extend({
       return false;
     },
 
-    finalize(session, mfaActivationState) {
+    verify(session, mfaActivationState) {
       session
-        .finalizeTotp(mfaActivationState)
+        .verifyTotpPasscode(mfaActivationState)
         .then(() => {
           set(this, 'controller.model.mfaActivationState', {});
           this.get('notify').success('Multi-factor authentication is now enabled.')
         })
-        .catch((response) => this.get('notify').error(response.message));
-      return false;
-    },
-
-    verify(session, mfaActivationState) {
-      session
-        .verifyTotpPasscode(mfaActivationState)
         .catch((response) => this.get('notify').error(response.message));
       return false;
     }

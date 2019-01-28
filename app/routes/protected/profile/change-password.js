@@ -7,8 +7,8 @@ export default Route.extend({
       session
         .changePassword(currentPassword, newPassword)
         .then(() => {
-          this.transitionTo('protected.index')
-            .then(newRoute => newRoute.get('notify').success('Your password was updated successfully.'));
+          this.refresh();
+          this.get('notify').success('Your password was updated successfully.');
         })
         .catch(response => this.get('notify').error(response.message));
       return false;

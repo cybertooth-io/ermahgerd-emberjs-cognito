@@ -2,13 +2,13 @@
   <legend>Update Profile</legend>
   <form class="form" onsubmit={{action (route-action "update" session model)}}>
     <div class="form-group">
-      <label for="js-locale" class="control-label">Locale</label>
+      <label for="js-locale">Locale</label>
       {{input-text
         aria-describedby="js-locale-help"
         autofocus=true
         class="form-control"
         id="js-locale"
-        placeholder="en_ca"
+        placeholder="en_CA"
         type="text"
         value=model.locale
       }}
@@ -17,7 +17,7 @@
       </small>
     </div>
     <div class="form-group">
-      <label for="js-zoneinfo" class="control-label">Timezone</label>
+      <label for="js-zoneinfo">Timezone</label>
       {{input-text
         aria-describedby="js-zoneinfo-help"
         class="form-control"

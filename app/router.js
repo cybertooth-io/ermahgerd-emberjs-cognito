@@ -17,6 +17,8 @@ Router.map(function () {
           this.route('sessions', function () {
           });
         });
+        this.route('new', function () {
+        });
       });
     });
     this.route('profile', function () {
