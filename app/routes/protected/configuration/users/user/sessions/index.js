@@ -10,8 +10,8 @@ export default Route.extend({
   model() {
     const user = this.modelFor('protected.configuration.users.user');
     return hash({
-      sessions: this.get('store').query('session', {
-        filter: { user: user.get('id') },
+      sessions: this.store.query('session', {
+        filter: { user: user.id },
         sort: '' +
           '-created-at'
       })

@@ -6,14 +6,14 @@ export default Route.extend({
     update(session, subjectAttributes) {
       session
         .updateUserAttributes(subjectAttributes)
-        .then(() => this.get('notify').success('Your profile was updated successfully.'))
-        .catch(response => this.get('notify').error(response.message));
+        .then(() => this.notify.success('Your profile was updated successfully.'))
+        .catch(response => this.notify.error(response.message));
       return false;
     }
   },
 
   model() {
-    return this.get('session.writableAttributes');
+    return this.session.writableAttributes;
   },
 
   session: service()

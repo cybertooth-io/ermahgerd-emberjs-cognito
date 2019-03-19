@@ -8,9 +8,9 @@ export default Route.extend({
         .changePassword(currentPassword, newPassword)
         .then(() => {
           this.refresh();
-          this.get('notify').success('Your password was updated successfully.');
+          this.notify.success('Your password was updated successfully.');
         })
-        .catch(response => this.get('notify').error(response.message));
+        .catch(response => this.notify.error(response.message));
       return false;
     }
   },

@@ -10,7 +10,7 @@ export default Route.extend({
         return true;
       }
 
-      user.get('roles').pushObject(chosenRole);
+      user.roles.pushObject(chosenRole);
       return true;
     },
 
@@ -18,11 +18,11 @@ export default Route.extend({
       user
         .save()
         .then((/*response*/) => {
-          this.get('notify').success('Created.');
+          this.notify.success('Created.');
         })
         .catch((errors) => {
           console.error('???', errors);
-          this.get('notify').error('Check for errors.');
+          this.notify.error('Check for errors.');
         });
       return false;
     }
@@ -31,7 +31,7 @@ export default Route.extend({
   model() {
     return hash({
       roles: get(this.modelFor('protected.configuration.users.new'), 'roles'),
-      user: this.get('store').createRecord('user')
+      user: this.store.createRecord('user')
     });
   }
 });

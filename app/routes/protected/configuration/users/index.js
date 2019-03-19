@@ -9,7 +9,7 @@ export default Route.extend({
 
   model() {
     return hash({
-      users: this.get('store').query('user', {
+      users: this.store.query('user', {
         sort: 'email'
       })
     })

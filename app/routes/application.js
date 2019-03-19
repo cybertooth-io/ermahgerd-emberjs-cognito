@@ -9,11 +9,11 @@ export default Route.extend(ApplicationRouteMixin, {
     },
 
     logout(session) {
-      this.get('store')
+      this.store
         .peekAll('current-user')
-        .get('firstObject')
+        .firstObject
         .signOut()
-        .finally(() => this.get('store').unloadAll('current-user'))
+        .finally(() => this.store.unloadAll('current-user'))
         .finally(() => session.invalidate())
     }
   },

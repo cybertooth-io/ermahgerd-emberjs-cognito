@@ -4,7 +4,7 @@ import Route from '@ember/routing/route';
 export default Route.extend({
   model() {
     return hash({
-      roles: this.get('store').query('role', { sort: 'name' })
+      roles: this.store.query('role', { sort: 'name' })
     })
   }
 });

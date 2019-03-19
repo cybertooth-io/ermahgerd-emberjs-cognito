@@ -14,11 +14,11 @@ export default Route.extend({
         session
           .disableTOTP()
           .then(() => {
-            this.get('notify').success('Multi-factor authentication has been disabled.');
+            this.notify.success('Multi-factor authentication has been disabled.');
           })
-          .catch((response) => this.get('notify').error(response.message));
+          .catch((response) => this.notify.error(response.message));
       } else {
-        this.get('notify').info('MFA is already disabled.')
+        this.notify.info('MFA is already disabled.')
       }
       return false;
     },
@@ -30,9 +30,9 @@ export default Route.extend({
           .then((mfaActivationState) => {
             set(this, 'controller.model.mfaActivationState', mfaActivationState);
           })
-          .catch((response) => this.get('notify').error(response.message));
+          .catch((response) => this.notify.error(response.message));
       } else {
-        this.get('notify').info('MFA is already enabled.')
+        this.notify.info('MFA is already enabled.')
       }
       return false;
     },
@@ -42,9 +42,9 @@ export default Route.extend({
         .verifyTotpPasscode(mfaActivationState)
         .then(() => {
           set(this, 'controller.model.mfaActivationState', {});
-          this.get('notify').success('Multi-factor authentication is now enabled.')
+          this.notify.success('Multi-factor authentication is now enabled.')
         })
-        .catch((response) => this.get('notify').error(response.message));
+        .catch((response) => this.notify.error(response.message));
       return false;
     }
   },

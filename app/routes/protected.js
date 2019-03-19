@@ -7,7 +7,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
    * @return {*|Promise} the `current-user` instance.
    */
   model() {
-    return this.get('store').queryRecord('current-user', {
+    return this.store.queryRecord('current-user', {
       include: '' +
         'roles' +
         ',sessions' +

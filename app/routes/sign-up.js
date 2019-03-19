@@ -15,9 +15,9 @@ export default Route.extend(UnauthenticatedRouteMixin, {
         validationData: []  //optional
       })
         .then((/*data*/) => {
-          this.get('notify').success('Confirm your email address and then sign in.');
+          this.notify.success('Confirm your email address and then sign in.');
         })
-        .catch(response => this.get('notify').error(response.message));
+        .catch(response => this.notify.error(response.message));
       return false;
     }
   },

@@ -90,6 +90,9 @@ ember install ember-cli-sass
 # Text and Textarea components that don't fail to autofocus
 ember install ember-cli-text-support-mixins
 
+# installing typescript to make life happy
+ember install ember-cli-typescript
+
 # Used to manipulate arrays template-side
 ember install ember-composable-helpers
 

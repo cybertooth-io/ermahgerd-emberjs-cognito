@@ -7,27 +7,27 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 export default Route.extend(UnauthenticatedRouteMixin, {
   actions: {
     completePassword(authenticationState, newPassword, additionalAttributes = {}/*, submitEvent*/) {
-      this.get('session')
+      this.session
         .completePassword(authenticationState, newPassword, additionalAttributes)
         .then(authenticationState => {
           if (authenticationState.get('mfaRequired?')) {
             set(this, 'controller.model.authenticationState', authenticationState);
           }
         })
-        .catch(response => this.get('notify').error(response.message));
+        .catch(response => this.notify.error(response.message));
       return false;
     },
 
     confirmSignIn(authenticationState, code) {
-      this.get('session')
+      this.session
         .confirmSignIn(authenticationState, code)
-        .catch(response => this.get('notify').error(response.message));
+        .catch(response => this.notify.error(response.message));
       return false;
     },
 
     signIn(username, password) {
-      const notification = this.get('notify').info('Signing you in...');
-      this.get('session')
+      const notification = this.notify.info('Signing you in...');
+      this.session
         .signIn(username, password)
         .then(authenticationState => {
           if (authenticationState.get('mfaRequired?') || authenticationState.get('newPasswordRequired?')) {
@@ -35,8 +35,8 @@ export default Route.extend(UnauthenticatedRouteMixin, {
           }
         })
         .catch(response => {
-          notification.set('visible', false);
-          this.get('notify').error(response.message);
+          notification.visible = false;
+          this.notify.error(response.message);
         });
       return false;
     }

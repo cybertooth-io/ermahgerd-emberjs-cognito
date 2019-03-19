@@ -10,10 +10,10 @@ export default Route.extend({
         .then(() => {
           this.transitionTo('reset-password', { queryParams: { username: username } })
             .then(newRoute => {
-              newRoute.get('notify').success('Check your email for your password reset code.');
+              newRoute.notify.success('Check your email for your password reset code.');
             });
         })
-        .catch(response => this.get('notify').error(response.message));
+        .catch(response => this.notify.error(response.message));
       return false;
     }
   },
