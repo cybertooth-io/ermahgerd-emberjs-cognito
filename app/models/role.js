@@ -1,17 +1,17 @@
+import { attr, hasMany } from '@ember-decorators/data';
 import BaseModel from 'ember-cybertooth-base-model/models/-base';
-import DS from 'ember-data';
 
-export default BaseModel.extend({
+export default class Role extends BaseModel {
 
   /** Attributes
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  key: DS.attr('string'),
-  name: DS.attr('string'),
-  notes: DS.attr('string'),
+  @attr key;
+  @attr name;
+  @attr notes;
 
   /** Relationships
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  users: DS.hasMany('user')
-});
+  @hasMany('user') users;
+}

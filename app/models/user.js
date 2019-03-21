@@ -1,25 +1,25 @@
+import { attr, hasMany } from '@ember-decorators/data';
 import { not, readOnly } from '@ember/object/computed';
 import BaseModel from 'ember-cybertooth-base-model/models/-base';
-import DS from 'ember-data';
 
-export default BaseModel.extend({
+export default class User extends BaseModel {
 
   /* Attributes
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  email: DS.attr('string'),
-  inCognito: DS.attr('boolean'),
+  @attr email;
+  @attr('boolean') inCognito;
 
   /* Relationships
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  roles: DS.hasMany('role'),
-  sessions: DS.hasMany('session', { inverse: 'user' }),
+  @hasMany('role') roles;
+  @hasMany('session', { inverse: 'user' }) sessions;
 
   /* Computed
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  'inCognito?': readOnly('inCognito'),
+  'inCognito?' = readOnly('inCognito');
 
-  'notInCognito?': not('inCognito?')
-});
+  'notInCognito?' = not('inCognito?');
+}

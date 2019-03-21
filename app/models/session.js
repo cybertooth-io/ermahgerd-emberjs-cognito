@@ -1,24 +1,24 @@
+import { attr, belongsTo } from '@ember-decorators/data';
 import BaseModel from 'ember-cybertooth-base-model/models/-base';
-import DS from 'ember-data';
 
-export default BaseModel.extend({
+export default class Session extends BaseModel {
 
   /** Attributes
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  authenticatedAt: DS.attr('date'),
-  browser: DS.attr('string'),
-  browserVersion: DS.attr('string'),
-  device: DS.attr('string'),
-  invalidatedAt: DS.attr('date'),
-  ipAddress: DS.attr('string'),
-  platform: DS.attr('string'),
-  platformVersion: DS.attr('string'),
+  @attr('date') authenticatedAt;
+  @attr browser;
+  @attr browserVersion;
+  @attr device;
+  @attr('date') invalidatedAt;
+  @attr ipAddress;
+  @attr platform;
+  @attr platformVersion;
 
   /** Relationships
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  invalidatedBy: DS.belongsTo('user'),
+  @belongsTo('user') invalidatedBy;
 
-  user: DS.belongsTo('user')
-});
+  @belongsTo('user') user;
+}

@@ -1,46 +1,53 @@
-import { inject as service } from '@ember/service';
+import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember-decorators/service';
 import { isNone } from '@ember/utils';
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 import Route from '@ember/routing/route';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-export default Route.extend(UnauthenticatedRouteMixin, {
-  actions: {
-    completePassword(authenticationState, newPassword, additionalAttributes = {}/*, submitEvent*/) {
-      this.session
-        .completePassword(authenticationState, newPassword, additionalAttributes)
-        .then(authenticationState => {
-          if (authenticationState.get('mfaRequired?')) {
-            set(this, 'controller.model.authenticationState', authenticationState);
-          }
-        })
-        .catch(response => this.notify.error(response.message));
-      return false;
-    },
+export default class Login extends Route.extend(UnauthenticatedRouteMixin) {
+  queryParams = {
+    username: { refreshModel: false }
+  };
+  @service session;
 
-    confirmSignIn(authenticationState, code) {
-      this.session
-        .confirmSignIn(authenticationState, code)
-        .catch(response => this.notify.error(response.message));
-      return false;
-    },
+  @action
+  completePassword(authenticationState, newPassword, additionalAttributes = {}/*, submitEvent*/) {
+    this.session
+      .completePassword(authenticationState, newPassword, additionalAttributes)
+      .then(authenticationState => {
+        if (authenticationState.get('mfaRequired?')) {
+          set(this, 'controller.model.authenticationState', authenticationState);
+        }
+      })
+      .catch(response => this.notify.error(response.message));
+    return false;
+  }
 
-    signIn(username, password) {
-      const notification = this.notify.info('Signing you in...');
-      this.session
-        .signIn(username, password)
-        .then(authenticationState => {
-          if (authenticationState.get('mfaRequired?') || authenticationState.get('newPasswordRequired?')) {
-            set(this, 'controller.model.authenticationState', authenticationState);
-          }
-        })
-        .catch(response => {
-          notification.visible = false;
-          this.notify.error(response.message);
-        });
-      return false;
-    }
-  },
+  @action
+  confirmSignIn(authenticationState, code) {
+    this.session
+      .confirmSignIn(authenticationState, code)
+      .catch(response => this.notify.error(response.message));
+    return false;
+  }
+
+  @action
+  signIn(username, password) {
+    const notification = this.notify.info('Signing you in...');
+    this.session
+      .signIn(username, password)
+      .then(authenticationState => {
+        if (authenticationState.get('mfaRequired?') || authenticationState.get('newPasswordRequired?')) {
+          set(this, 'controller.model.authenticationState', authenticationState);
+        }
+      })
+      .catch(response => {
+        notification.set('visible', false); // TODO: eventually this can be fixed if the notify is objectified
+        this.notify.error(response.message);
+      });
+    return false;
+  }
 
   model(params) {
     return {
@@ -49,13 +56,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
       mfaCode: '',
       newPassword: '',
       password: '',
-      username: isNone(get(params, 'username')) ? '' : get(params, 'username')
+      username: isNone(params.username) ? '' : params.username
     }
-  },
-
-  queryParams: {
-    username: { refreshModel: false }
-  },
-
-  session: service()
-});
+  }
+}

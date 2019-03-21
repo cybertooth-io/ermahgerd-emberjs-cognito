@@ -96,6 +96,11 @@ ember install ember-cli-typescript
 # Used to manipulate arrays template-side
 ember install ember-composable-helpers
 
+# install ember-decorators for dressing up your app with typescript; this stuff will eventually ship with Octane edition
+ember install ember-decorators
+# install native class polyfill until upgrading past 3.4
+ember install ember-native-class-polyfill
+
 # Used to format dates
 ember install ember-helper-locale-date
 

@@ -1,22 +1,23 @@
+import { action } from '@ember-decorators/object';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import Route from '@ember/routing/route';
 
-export default Route.extend(ApplicationRouteMixin, {
-  actions: {
-    error() {
-      console.error('Application Error Substate', arguments);
-      return true;
-    },
+export default class Application extends Route.extend(ApplicationRouteMixin) {
+  @action
+  error() {
+    console.error('Application Error Substate', arguments);
+    return true;
+  }
 
-    logout(session) {
-      this.store
-        .peekAll('current-user')
-        .firstObject
-        .signOut()
-        .finally(() => this.store.unloadAll('current-user'))
-        .finally(() => session.invalidate())
-    }
-  },
+  @action
+  logout(session) {
+    this.store
+      .peekAll('current-user')
+      .firstObject
+      .signOut()
+      .finally(() => this.store.unloadAll('current-user'))
+      .finally(() => session.invalidate())
+  }
 
   /**
    * I am overriding the `ember-simple-auth` default behaviour from the `ApplicationRouteMixin` so that it
@@ -28,4 +29,4 @@ export default Route.extend(ApplicationRouteMixin, {
   sessionInvalidated() {
     this.transitionTo('index');
   }
-});
+}

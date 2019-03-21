@@ -1,9 +1,9 @@
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-  email: '',
+export default class ForgotPassword extends Controller {
+  email = '';
 
-  queryParams: [
+  queryParams = [
     { email: { type: 'string' } }
   ]
-});
+}

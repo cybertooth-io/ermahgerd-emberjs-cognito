@@ -1,11 +1,11 @@
 import { hash } from 'rsvp';
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 import Route from '@ember/routing/route';
 
-export default Route.extend({
+export default class Index extends Route {
   afterModel(resolvedModel) {
-    set(resolvedModel, 'usersCount', get(resolvedModel, 'users.meta.record-count'));
-  },
+    set(resolvedModel, 'usersCount', resolvedModel.users.meta['record-count']);
+  }
 
   model() {
     return hash({
@@ -14,4 +14,4 @@ export default Route.extend({
       })
     })
   }
-});
+}

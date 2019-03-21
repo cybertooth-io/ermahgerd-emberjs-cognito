@@ -7,7 +7,6 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function () {
-  this.mount('ember-cognito-engine', { path: '/test' });
   this.route('protected', function () {
     this.route('configuration', function () {
       this.route('roles', function () {

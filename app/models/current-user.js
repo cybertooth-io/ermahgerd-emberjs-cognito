@@ -1,20 +1,24 @@
+import { attr, hasMany } from '@ember-decorators/data';
 import { collectionAction } from 'ember-api-actions';
 import BaseModel from 'ember-cybertooth-base-model/models/-base';
-import DS from 'ember-data';
 
-export default BaseModel.extend({
+export default class CurrentUser extends BaseModel {
   /* Attributes
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  email: DS.attr('string'),
+  @attr email;
 
   /* Relationships
    * ---------------------------------------------------------------------------------------------------------------- */
 
-  roles: DS.hasMany('role'),
-  sessions: DS.hasMany('session'),
+  @hasMany('role') roles;
+  @hasMany('session') sessions;
 
   /* Instance Methods
+   * ---------------------------------------------------------------------------------------------------------------- */
+  _signOut = collectionAction({ path: 'sign-out', type: 'PATCH' });
+
+  /* Custom API end points
    * ---------------------------------------------------------------------------------------------------------------- */
 
   signOut() {
@@ -23,10 +27,5 @@ export default BaseModel.extend({
         .then(() => resolve(this))
         .catch(response => reject(response))
     });
-  },
-
-  /* Custom API end points
-   * ---------------------------------------------------------------------------------------------------------------- */
-
-  _signOut: collectionAction({ path: 'sign-out', type: 'PATCH' })
-});
+  }
+}

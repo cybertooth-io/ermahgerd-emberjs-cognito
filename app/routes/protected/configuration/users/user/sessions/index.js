@@ -1,11 +1,11 @@
 import { hash } from 'rsvp';
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 import Route from '@ember/routing/route';
 
-export default Route.extend({
+export default class Index extends Route {
   afterModel(resolvedModel) {
-    set(resolvedModel, 'sessionsCount', get(resolvedModel, 'sessions.meta.record-count'));
-  },
+    set(resolvedModel, 'sessionsCount', resolvedModel.sessions.meta['record-count']);
+  }
 
   model() {
     const user = this.modelFor('protected.configuration.users.user');
@@ -17,4 +17,4 @@ export default Route.extend({
       })
     });
   }
-});
+}
