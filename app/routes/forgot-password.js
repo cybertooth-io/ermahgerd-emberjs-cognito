@@ -1,6 +1,5 @@
 import { hash } from 'rsvp';
-import { action } from '@ember-decorators/object';
-import { getWithDefault } from '@ember/object';
+import { action, getWithDefault } from '@ember/object';
 import Route from '@ember/routing/route';
 
 export default class ForgotPassword extends Route {

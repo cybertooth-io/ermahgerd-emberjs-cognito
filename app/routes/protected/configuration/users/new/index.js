@@ -1,4 +1,4 @@
-import { action } from '@ember-decorators/object';
+import { action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';

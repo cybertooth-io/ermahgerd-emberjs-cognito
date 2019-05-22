@@ -1,5 +1,4 @@
-import { action } from '@ember-decorators/object';
-import { set } from '@ember/object';
+import { action, set } from '@ember/object';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
 

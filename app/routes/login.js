@@ -1,7 +1,6 @@
-import { action } from '@ember-decorators/object';
-import { inject as service } from '@ember-decorators/service';
+import { action, set } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { isNone } from '@ember/utils';
-import { set } from '@ember/object';
 import Route from '@ember/routing/route';
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 

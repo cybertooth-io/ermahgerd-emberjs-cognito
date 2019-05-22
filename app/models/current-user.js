@@ -1,6 +1,8 @@
-import { attr, hasMany } from '@ember-decorators/data';
 import { collectionAction } from 'ember-api-actions';
 import BaseModel from 'ember-cybertooth-base-model/models/-base';
+import DS from 'ember-data';
+
+const { attr, hasMany } = DS;
 
 export default class CurrentUser extends BaseModel {
   /* Attributes

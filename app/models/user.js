@@ -1,6 +1,8 @@
-import { attr, hasMany } from '@ember-decorators/data';
+import DS from 'ember-data';
 import { not, readOnly } from '@ember/object/computed';
 import BaseModel from 'ember-cybertooth-base-model/models/-base';
+
+const { attr, hasMany } = DS;
 
 export default class User extends BaseModel {
 

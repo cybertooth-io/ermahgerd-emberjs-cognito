@@ -1,6 +1,6 @@
 import { isNone } from '@ember/utils';
-import { action } from '@ember-decorators/object';
-import { inject as service } from '@ember-decorators/service';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
 

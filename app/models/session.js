@@ -1,5 +1,7 @@
-import { attr, belongsTo } from '@ember-decorators/data';
 import BaseModel from 'ember-cybertooth-base-model/models/-base';
+import DS from 'ember-data';
+
+const { attr, belongsTo } = DS;
 
 export default class Session extends BaseModel {
 
